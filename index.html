@@ -82,6 +82,8 @@ h1.hero span{color:var(--yellow)}
 .day .num{font-family:'Space Grotesk';font-weight:700;font-size:13px}
 .day .dot{width:7px;height:7px;border-radius:50%;background:#35c759 !important;box-shadow:0 0 8px rgba(53,199,89,.55);position:absolute;right:7px;top:7px}
 .day.has-photo .dot{background:#22c55e !important}.day .preview{font-size:8px;color:var(--text-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:7px}
+.day-thumb{display:block;width:100%;height:26px;object-fit:cover;border-radius:6px;margin-top:5px;cursor:pointer;border:1px solid rgba(255,255,255,.12)}
+.day-thumb:active{transform:scale(.94)}
 .day.in-germany{background:rgba(255,210,0,.10);border-color:rgba(255,210,0,.4)}
 .day.in-germany .num{color:var(--yellow-soft)}
 .day.in-germany.sunday{background:rgba(227,75,60,.13);border-color:rgba(227,75,60,.55)}
@@ -1358,10 +1360,12 @@ function renderCalendar(){
     }
     if(d.getDay()===0) el.classList.add('sunday');
     if(k===keyOf(new Date())) el.classList.add('today');
-    const hasPhoto=item?.photos?.length || item?.photo;
+    const dayPhotos=getItemPhotos(item);
+    const hasPhoto=dayPhotos.length>0;
     const hasWeather=item?.weather && (item.weather.temp!=='' || item.weather.icon);
     if(hasPhoto) el.classList.add('has-photo');
     el.innerHTML='<span class="num">'+n+'</span>'+(item?.text||hasPhoto||hasWeather?'<span class="dot"></span>':'')+
+      (hasPhoto?'<img class="day-thumb" src="'+dayPhotos[0]+'" alt="Фото" data-date="'+k+'">':'')+
       (item?.text?'<div class="preview">'+escapeHtml(item.text)+'</div>':'')+
       (hasWeather?'<div class="weather-cell">'+escapeHtml(item.weather.icon||'')+' '+(item.weather.temp!==''?escapeHtml(String(item.weather.temp))+'°C':'')+'</div>':'');
     el.dataset.date=k;
@@ -1371,6 +1375,16 @@ function renderCalendar(){
       openDay(new Date(y,m,n));
       return false;
     };
+    const thumbEl=el.querySelector('.day-thumb');
+    if(thumbEl){
+      thumbEl.onclick=function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        openDayPhotosDirect(k);
+        return false;
+      };
+    }
     days.appendChild(el);
   }
   renderWeatherStats();
@@ -1521,6 +1535,13 @@ function openPhotoViewer(i){
   renderViewer();
   document.getElementById('photoViewer').classList.add('open');
 }
+function openDayPhotosDirect(dateKey){
+  const data=loadData(), item=data[dateKey];
+  const photos=getItemPhotos(item);
+  if(!photos.length) return;
+  pendingPhotos=photos;
+  openPhotoViewer(0);
+}
 function renderViewer(){
   document.getElementById('fullPhoto').src=pendingPhotos[viewerIndex];
   document.getElementById('viewerCounter').textContent='Фото '+(viewerIndex+1)+' з '+pendingPhotos.length;
@@ -1531,6 +1552,25 @@ function viewerNav(delta){
   renderViewer();
 }
 function closePhotoViewer(){document.getElementById('photoViewer').classList.remove('open')}
+(function initPhotoSwipe(){
+  let touchStartX=0, touchStartY=0, touchActive=false;
+  document.addEventListener('touchstart',function(e){
+    const img=e.target.closest('#fullPhoto');
+    if(!img) return;
+    touchActive=true;
+    touchStartX=e.touches[0].clientX;
+    touchStartY=e.touches[0].clientY;
+  },{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(!touchActive) return;
+    touchActive=false;
+    const dx=e.changedTouches[0].clientX-touchStartX;
+    const dy=e.changedTouches[0].clientY-touchStartY;
+    if(Math.abs(dx)>40 && Math.abs(dx)>Math.abs(dy)){
+      viewerNav(dx<0?1:-1);
+    }
+  },{passive:true});
+})();
 const infoStorage = 'praktikum_sections_v1';
 function loadInfoSections(){
   try{return JSON.parse(localStorage.getItem(infoStorage)||'{}')}catch(e){return{}}
