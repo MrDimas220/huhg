@@ -578,6 +578,9 @@ background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);font-siz
 .map-click-layer polygon{fill:transparent;stroke:transparent;cursor:pointer;pointer-events:all;}
 .map-click-layer polygon:focus{outline:none;}
 .map-click-layer polygon:hover{fill:transparent;stroke:transparent;}
+.map-number-badge{pointer-events:none;}
+.map-number-badge circle{fill:var(--yellow);stroke:#1a1a1a;stroke-width:2;filter:drop-shadow(0 0 6px rgba(255,210,0,0.85));}
+.map-number-badge text{fill:#1a1a1a;font-weight:800;font-size:34px;text-anchor:middle;dominant-baseline:central;font-family:inherit;}
 .map-reference .map-legend{line-height:1.4;}
 </style>
 
@@ -1237,6 +1240,21 @@ background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);font-siz
             <polygon data-zone="1" points="235,1017 346,1017 346,1085 235,1085" tabindex="0" role="button" aria-label="Об’єкт №1" onclick="selectMapZone(1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(1)}"></polygon>
             <polygon data-zone="13" points="680,641 1190,641 1190,1017 680,1017 680,887 533,887 533,737 680,737" tabindex="0" role="button" aria-label="Об’єкт №13" onclick="selectMapZone(13)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(13)}"></polygon>
             <polygon data-zone="15" points="680,737 1190,737 1190,1017 680,1017" tabindex="0" role="button" aria-label="Об’єкт №15" onclick="selectMapZone(15)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(15)}"></polygon>
+            <g class="map-number-badge" data-zone="14"><circle cx="243" cy="172" r="30"/><text x="243" y="172">14</text></g>
+            <g class="map-number-badge" data-zone="6"><circle cx="383.5" cy="344" r="30"/><text x="383.5" y="344">6</text></g>
+            <g class="map-number-badge" data-zone="7"><circle cx="474.5" cy="326" r="30"/><text x="474.5" y="326">7</text></g>
+            <g class="map-number-badge" data-zone="8"><circle cx="474.5" cy="453.5" r="30"/><text x="474.5" y="453.5">8</text></g>
+            <g class="map-number-badge" data-zone="12"><circle cx="752" cy="277" r="30"/><text x="752" y="277">12</text></g>
+            <g class="map-number-badge" data-zone="9"><circle cx="652" cy="404.5" r="30"/><text x="652" y="404.5">9</text></g>
+            <g class="map-number-badge" data-zone="10"><circle cx="1021" cy="361.5" r="30"/><text x="1021" y="361.5">10</text></g>
+            <g class="map-number-badge" data-zone="11"><circle cx="1327.5" cy="361.5" r="30"/><text x="1327.5" y="361.5">11</text></g>
+            <g class="map-number-badge" data-zone="4"><circle cx="457.5" cy="764" r="30"/><text x="457.5" y="764">4</text></g>
+            <g class="map-number-badge" data-zone="5"><circle cx="606.5" cy="689" r="30"/><text x="606.5" y="689">5</text></g>
+            <g class="map-number-badge" data-zone="3"><circle cx="290.5" cy="824" r="30"/><text x="290.5" y="824">3</text></g>
+            <g class="map-number-badge" data-zone="2"><circle cx="457.5" cy="952" r="30"/><text x="457.5" y="952">2</text></g>
+            <g class="map-number-badge" data-zone="1"><circle cx="290.5" cy="1051" r="30"/><text x="290.5" y="1051">1</text></g>
+            <g class="map-number-badge" data-zone="13"><circle cx="935" cy="690" r="30"/><text x="935" y="690">13</text></g>
+            <g class="map-number-badge" data-zone="15"><circle cx="935" cy="877" r="30"/><text x="935" y="877">15</text></g>
           </svg>
           <button type="button" class="map-zone12-hit" aria-label="Об’єкт №12" title="12. Накриття для возів і техніки" onclick="selectMapZone(12)"></button>
         </div>
@@ -1924,7 +1942,7 @@ const mapLabels = {
   11: 'Гараж',
   12: 'Накриття для возів і техніки',
   13: 'Двір',
-  14: 'Номер не вказаний',
+  14: 'Склад ящиків',
   15: 'Номер не вказаний',
   '2/2': 'Будинок на 2 поверсі'
 };
