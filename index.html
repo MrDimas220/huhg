@@ -2286,6 +2286,37 @@ Object.assign(OFFLINE_TRANSLATIONS, {
   "Гараж":"Garage"
 });
 
+/* ===== Категорії словника та навігаційні написи ===== */
+Object.assign(OFFLINE_TRANSLATIONS, {
+  "⏰ Час, дні тижня та календар":"⏰ Zeit, Wochentage und Kalender",
+  "⏱ Робочий процес":"⏱ Arbeitsablauf",
+  "🌤 Погода та природа":"🌤 Wetter und Natur",
+  "🍎 Сад: дерева та догляд":"🍎 Garten: Bäume und Pflege",
+  "🏃 Дії, прикметники та протилежності":"🏃 Handlungen, Adjektive und Gegensätze",
+  "🏠 Побут, квартира та техніка":"🏠 Alltag, Wohnung und Technik",
+  "🏢 Документи та робота":"🏢 Dokumente und Arbeit",
+  "🐄 Робота та тварини":"🐄 Arbeit und Tiere",
+  "🐛 Шкідники, хвороби та погодні ризики":"🐛 Schädlinge, Krankheiten und Wetterrisiken",
+  "👕 Одяг: Що брати":"👕 Kleidung: Was mitnehmen",
+  "💊 Здоров'я та догляд":"💊 Gesundheit und Pflege",
+  "💬 Фрази для роботи в команді":"💬 Redewendungen für die Teamarbeit",
+  "📦 Склад, сортування та логістика":"📦 Lager, Sortierung und Logistik",
+  "📱 Смартфон та нотатки":"📱 Smartphone und Notizen",
+  "🗣 Комунікація":"🗣 Kommunikation",
+  "🚜 Техніка: деталі та запчастини":"🚜 Technik: Teile und Ersatzteile",
+  "🛒 Магазин, побут та самопочуття":"🛒 Geschäft, Alltag und Wohlbefinden",
+  "🛒 Побут, покупки та транспорт":"🛒 Alltag, Einkauf und Transport",
+  "🛠 Обслуговування, ремонт та інструменти":"🛠 Wartung, Reparatur und Werkzeuge",
+  "🦺 Безпека та прибирання":"🦺 Sicherheit und Reinigung",
+  "🧠 Стан, характеристика та почуття":"🧠 Zustand, Eigenschaften und Gefühle",
+  "🧱 Двір, будівництво та матеріали":"🧱 Hof, Bau und Materialien",
+  "‹ Назад":"‹ Zurück",
+  "‹ Попереднє":"‹ Vorheriges",
+  "‹ Попередній день":"‹ Vorheriger Tag",
+  "Наступне ›":"Nächstes ›",
+  "Наступний день ›":"Nächster Tag ›"
+});
+
 const PAIRS=Object.entries(OFFLINE_TRANSLATIONS).sort((a,b)=>b[0].length-a[0].length);
 
 function translateText(text){
@@ -2313,8 +2344,8 @@ function translateViewOffline(root){
     if(!originalTextMap.has(node)) originalTextMap.set(node,node.nodeValue);
     node.nodeValue=translateText(originalTextMap.get(node));
   });
-  document.querySelectorAll("[placeholder],[title],[aria-label]").forEach(el=>{
-    ["placeholder","title","aria-label"].forEach(attr=>{
+  document.querySelectorAll("[placeholder],[title],[aria-label],[alt]").forEach(el=>{
+    ["placeholder","title","aria-label","alt"].forEach(attr=>{
       if(!el.hasAttribute(attr)) return;
       let map=originalAttrMap.get(el);
       if(!map){map={};originalAttrMap.set(el,map);}
@@ -2329,7 +2360,7 @@ function restoreUK(){
   getTextNodes(document.body).forEach(node=>{
     if(originalTextMap.has(node)) node.nodeValue=originalTextMap.get(node);
   });
-  document.querySelectorAll("[placeholder],[title],[aria-label]").forEach(el=>{
+  document.querySelectorAll("[placeholder],[title],[aria-label],[alt]").forEach(el=>{
     const map=originalAttrMap.get(el);
     if(!map) return;
     Object.keys(map).forEach(attr=>el.setAttribute(attr,map[attr]));
