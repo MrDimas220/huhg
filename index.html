@@ -580,6 +580,9 @@ background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);font-siz
 .map-click-layer polygon:focus{outline:none;}
 .map-click-layer polygon:hover{fill:transparent;stroke:transparent;}
 .map-number-badge{pointer-events:none;}
+.map-number-hit{fill:transparent;stroke:none;cursor:pointer;pointer-events:all;}
+.map-number-hit:hover{fill:rgba(255,209,0,.12);}
+.map-number-hit:focus-visible{outline:2px solid var(--yellow);outline-offset:2px;}
 .map-number-badge circle{fill:var(--yellow);stroke:#1a1a1a;stroke-width:2;filter:drop-shadow(0 0 6px rgba(255,210,0,0.85));}
 .map-number-badge text{fill:#1a1a1a;font-weight:800;font-size:22px;text-anchor:middle;dominant-baseline:middle;font-family:'Space Grotesk',Inter,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;}
 .map-reference .map-legend{line-height:1.4;}
@@ -1285,6 +1288,23 @@ background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);font-siz
             <g class="map-number-badge" data-zone="1"><circle cx="301" cy="998" r="30"/><text x="301" y="998">1</text></g>
             <g class="map-number-badge" data-zone="13"><circle cx="914" cy="679" r="30"/><text x="914" y="679">13</text></g>
             <g class="map-number-badge" data-zone="15"><circle cx="949" cy="891" r="30"/><text x="949" y="891">15</text></g>
+          <g class="map-number-hits">
+            <circle class="map-number-hit" data-zone="14" cx="244" cy="165" r="34" tabindex="0" role="button" aria-label="Об’єкт №14" onclick="selectMapZone(14)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(14)}"></circle>
+            <circle class="map-number-hit" data-zone="6" cx="298" cy="349" r="34" tabindex="0" role="button" aria-label="Об’єкт №6" onclick="selectMapZone(6)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(6)}"></circle>
+            <circle class="map-number-hit" data-zone="7" cx="472" cy="347" r="34" tabindex="0" role="button" aria-label="Об’єкт №7" onclick="selectMapZone(7)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(7)}"></circle>
+            <circle class="map-number-hit" data-zone="8" cx="472" cy="455" r="34" tabindex="0" role="button" aria-label="Об’єкт №8" onclick="selectMapZone(8)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(8)}"></circle>
+            <circle class="map-number-hit" data-zone="12" cx="749" cy="254" r="34" tabindex="0" role="button" aria-label="Об’єкт №12" onclick="selectMapZone(12)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(12)}"></circle>
+            <circle class="map-number-hit" data-zone="9" cx="747" cy="410" r="34" tabindex="0" role="button" aria-label="Об’єкт №9" onclick="selectMapZone(9)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(9)}"></circle>
+            <circle class="map-number-hit" data-zone="10" cx="1102" cy="383" r="34" tabindex="0" role="button" aria-label="Об’єкт №10" onclick="selectMapZone(10)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(10)}"></circle>
+            <circle class="map-number-hit" data-zone="11" cx="1318" cy="386" r="34" tabindex="0" role="button" aria-label="Об’єкт №11" onclick="selectMapZone(11)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(11)}"></circle>
+            <circle class="map-number-hit" data-zone="4" cx="381" cy="707" r="34" tabindex="0" role="button" aria-label="Об’єкт №4" onclick="selectMapZone(4)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(4)}"></circle>
+            <circle class="map-number-hit" data-zone="5" cx="597" cy="697" r="34" tabindex="0" role="button" aria-label="Об’єкт №5" onclick="selectMapZone(5)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(5)}"></circle>
+            <circle class="map-number-hit" data-zone="3" cx="300" cy="831" r="34" tabindex="0" role="button" aria-label="Об’єкт №3" onclick="selectMapZone(3)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(3)}"></circle>
+            <circle class="map-number-hit" data-zone="2" cx="462" cy="951" r="34" tabindex="0" role="button" aria-label="Об’єкт №2" onclick="selectMapZone(2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(2)}"></circle>
+            <circle class="map-number-hit" data-zone="1" cx="301" cy="998" r="34" tabindex="0" role="button" aria-label="Об’єкт №1" onclick="selectMapZone(1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(1)}"></circle>
+            <circle class="map-number-hit" data-zone="13" cx="914" cy="679" r="34" tabindex="0" role="button" aria-label="Об’єкт №13" onclick="selectMapZone(13)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(13)}"></circle>
+            <circle class="map-number-hit" data-zone="15" cx="949" cy="891" r="34" tabindex="0" role="button" aria-label="Об’єкт №15" onclick="selectMapZone(15)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectMapZone(15)}"></circle>
+          </g>
           </svg>
           <button type="button" class="map-zone12-hit" aria-label="Об’єкт №12" title="12. Накриття для возів і техніки" onclick="selectMapZone(12)"></button>
         </div>
